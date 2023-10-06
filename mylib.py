@@ -61,13 +61,6 @@ def test_ex15_50():
     show_frequency_range_with_randUniform(80)
     show_frequency_range_with_randUniform(100)
 
-# def plot_empirical_cdf(sample):
-#     hist, edges = np.histogram(sample, bins=len(sample))
-#     Y = hist.cumsum()
-#     for i in range(len(Y)):
-#         plt.plot([edges[i], edges[i+1]],[Y[i], Y[i]], c="blue")
-#     plt.show()
-
 def plot_empirical_distribution_function(sample, title = 'Эмпирическая функция распределения'):
     ecdf = ECDF(sample)
     plt.step(ecdf.x, ecdf.y)
@@ -89,3 +82,4 @@ def test_ex15_53():
     show_bar_chart(numbers, bins, '15-53: Гистограмма для вариационного ряда')
     show_frequency_range(numbers, bins, '15-53: Полигон частот для вариационного ряда')
     plot_empirical_distribution_function(numbers, '15-53: Эмпирическая функция распределения')
+    print("15-53: Выборочное среднее", np.mean(numbers))
