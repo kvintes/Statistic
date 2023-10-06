@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
+from statsmodels.distributions.empirical_distribution import ECDF
 #15-50
 # гистограммы
 def show_bar_chart(numbers: list, bins: list, title = 'Гистограмма частот'):# matplotlib.pyplot as plt
@@ -58,6 +60,23 @@ def test_ex15_50():
     show_frequency_range_with_randUniform(50)
     show_frequency_range_with_randUniform(80)
     show_frequency_range_with_randUniform(100)
+
+# def plot_empirical_cdf(sample):
+#     hist, edges = np.histogram(sample, bins=len(sample))
+#     Y = hist.cumsum()
+#     for i in range(len(Y)):
+#         plt.plot([edges[i], edges[i+1]],[Y[i], Y[i]], c="blue")
+#     plt.show()
+
+def plot_empirical_distribution_function(sample, title = 'Эмпирическая функция распределения'):
+    ecdf = ECDF(sample)
+    plt.step(ecdf.x, ecdf.y)
+    plt.ylabel('$F(x)$', fontsize=20)
+    plt.xlabel('$x$', fontsize=20)# строим эмпирическую функцию по выборке
+    plt.title(title)
+    plt.grid(True)
+    plt.show()
+
 #testing function 15-53
 def test_ex15_53():
     numbers = [0.01, 0.04, 0.17, 0.18, 0.22, 0.22, 0.25, 0.25,
@@ -69,3 +88,4 @@ def test_ex15_53():
     bins = [(r - 1) / 10 for r in range(1, 10)]
     show_bar_chart(numbers, bins, '15-53: Гистограмма для вариационного ряда')
     show_frequency_range(numbers, bins, '15-53: Полигон частот для вариационного ряда')
+    plot_empirical_distribution_function(numbers, '15-53: Эмпирическая функция распределения')
